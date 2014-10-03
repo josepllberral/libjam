@@ -124,9 +124,13 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(OUTPUT).gba	:	$(OUTPUT).elf
+$(OUTPUT).gba	:	$(OUTPUT).elf libjam.a
 
 $(OUTPUT).elf	:	$(OFILES)
+
+libjam.a	:	$(OFILES)
+	ar ruv libjam.a $(OFILES)
+	ranlib libjam.a
 
 %.o	:	%.pcx
 	@echo $(notdir $<)
